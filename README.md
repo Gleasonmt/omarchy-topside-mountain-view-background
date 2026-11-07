@@ -85,7 +85,8 @@ tools/build.sh           # rebuilds live/*.frag.qsb and live/*.json, the still i
 tools/build.sh --media   # also the animated previews in media/ (a few minutes)
 ```
 
-and commit the results. Needs `qt6-shadertools`, `qt6-declarative`, ImageMagick, jq and
+and commit the results. `tools/check.sh` runs the same checks as the pull request CI
+(the shader compiles for every GPU Omarchy runs on, and the files are in place; needs `glslang` and `jq` too). Needs `qt6-shadertools`, `qt6-declarative`, ImageMagick, jq and
 (for `--media`) ffmpeg. To try a change on your own desktop, run
 `live-wallpaper update` after pushing, or copy the built files into
 `~/.config/omarchy/live-backgrounds/topside-mountain-view/`.
