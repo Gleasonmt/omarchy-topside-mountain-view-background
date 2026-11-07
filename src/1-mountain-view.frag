@@ -71,7 +71,7 @@ vec2 roadAt(float s, float L, out vec2 dir) {
     if (acc + l >= want) { seg = i - 1; f = clamp((want - acc) / l, 0., 1.); break; }
     acc += l;
   }
-  vec2 a = ROAD[max(seg - 1, 0)], b = ROAD[seg], c = ROAD[seg + 1], d = ROAD[min(seg + 2, NR - 1)];
+  vec2 a = ROAD[seg > 0 ? seg - 1 : 0], b = ROAD[seg], c = ROAD[seg + 1], d = ROAD[seg + 2 < NR ? seg + 2 : NR - 1];
   dir = normalize(crd(a, b, c, d, f) + 1e-4);
   return cr(a, b, c, d, f);
 }

@@ -16,10 +16,10 @@ Install the plugin and this background together:
 
 ```bash
 omarchy plugin add https://github.com/Gleasonmt/omarchy-live-wallpaper --enable --yes
-git clone --depth 1 https://github.com/Gleasonmt/omarchy-topside-mountain-view-theme ~/.config/omarchy/live-backgrounds/topside-mountain-view && omarchy restart shell
+git clone --depth 1 https://github.com/Gleasonmt/omarchy-topside-mountain-view-background ~/.config/omarchy/live-backgrounds/topside-mountain-view && omarchy restart shell
 ```
 
-If you've installed the plugin's optional `live-wallpaper` command, `live-wallpaper install https://github.com/Gleasonmt/omarchy-topside-mountain-view-theme` does the second line for you.
+If you've installed the plugin's optional `live-wallpaper` command, `live-wallpaper install https://github.com/Gleasonmt/omarchy-topside-mountain-view-background` does the second line for you.
 
 Then pick **Topside Mountain View** in Omarchy menu → Style → Background. It's offered under every theme,
 including ones you install later. Update with `live-wallpaper update`, or `git pull` in that folder.
@@ -85,7 +85,8 @@ tools/build.sh           # rebuilds live/*.frag.qsb and live/*.json, the still i
 tools/build.sh --media   # also the animated previews in media/ (a few minutes)
 ```
 
-and commit the results. Needs `qt6-shadertools`, `qt6-declarative`, ImageMagick, jq and
+and commit the results. `tools/check.sh` runs the same checks as the pull request CI
+(the shader compiles for every GPU Omarchy runs on, and the files are in place; needs `glslang` and `jq` too). Needs `qt6-shadertools`, `qt6-declarative`, ImageMagick, jq and
 (for `--media`) ffmpeg. To try a change on your own desktop, run
 `live-wallpaper update` after pushing, or copy the built files into
 `~/.config/omarchy/live-backgrounds/topside-mountain-view/`.
