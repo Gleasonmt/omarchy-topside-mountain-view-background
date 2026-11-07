@@ -1,46 +1,39 @@
 # Topside Mountain View
 
-An animated theme for [Omarchy](https://omarchy.org). A scout on a ledge at dusk, looking out over
+An animated background for [Omarchy](https://omarchy.org). A scout on a ledge at dusk, looking out over
 the mesas: his coat moving in the wind, a radio mast blinking on the far cliff, a drone on patrol, a
 convoy crawling through the fog in the valley. Now and then he kneels to watch the road through
 binoculars, then walks off the ledge and later walks back.
 
 > **Animated with [omarchy-live-wallpaper](https://github.com/Gleasonmt/omarchy-live-wallpaper).**
-> Install that plugin too (below) to make the wallpaper move and to get the
-> **Topside Mountain View Lite** version. Without it the theme still works, with a still wallpaper.
-
+> A background, not a theme: it goes with whatever theme you use.
 ![Topside Mountain View, moving](media/topside-mountain-view.webp)
 
 ## Install
 
-Theme and plugin together:
+You need the [live-wallpaper plugin](https://github.com/Gleasonmt/omarchy-live-wallpaper), 1.2.0 or later.
+Install the plugin and this background together:
 
 ```bash
-omarchy theme install https://github.com/Gleasonmt/omarchy-topside-mountain-view-theme && omarchy plugin add https://github.com/Gleasonmt/omarchy-live-wallpaper --enable --yes
+omarchy plugin add https://github.com/Gleasonmt/omarchy-live-wallpaper --enable --yes
+git clone --depth 1 https://github.com/Gleasonmt/omarchy-topside-mountain-view-theme ~/.config/omarchy/live-backgrounds/topside-mountain-view && omarchy restart shell
 ```
 
-or one at a time:
+If you've installed the plugin's optional `live-wallpaper` command, `live-wallpaper install https://github.com/Gleasonmt/omarchy-topside-mountain-view-theme` does the second line for you.
 
-```bash
-omarchy theme install https://github.com/Gleasonmt/omarchy-topside-mountain-view-theme
-omarchy plugin add https://github.com/Gleasonmt/omarchy-live-wallpaper --enable
-```
-
-Then pick **Topside Mountain View** in Omarchy menu → Style → Theme. The first line is the theme
-(colors, wallpaper, icons, keyboard lighting); the second makes the wallpaper move,
-and also adds **Topside Mountain View Lite** to the picker. Without the plugin you get the theme
-with a still wallpaper.
+Then pick **Topside Mountain View** in Omarchy menu → Style → Background. It's offered under every theme,
+including ones you install later. Update with `live-wallpaper update`, or `git pull` in that folder.
 
 Already have the plugin? Run `omarchy plugin update`: this scene needs its support for
-picture layers and video. Update the theme itself with `omarchy theme update`.
+picture layers and video.
 
-## Topside Mountain View Lite
+## Details mode
 
-The same scene with the scout standing still and only small details alive (the mast's light,
-the drone, the vehicles). It uses the least power, which makes it good for battery or a
-calmer desktop:
+In details mode the picture stays still and only small details move. It uses the least power,
+which makes it good on battery or if you want a calmer desktop. Turn it on with `live-wallpaper mode details`
+(`battery-mode details` for battery only) or in Omarchy menu → Style → Live Wallpaper:
 
-![Topside Mountain View Lite](media/topside-mountain-view-lite.webp)
+![Topside Mountain View, details mode](media/topside-mountain-view-lite.webp)
 
 ## How it moves
 
@@ -67,7 +60,7 @@ covers the screen, so these are the costs while it's actually visible:
 | Mode | GPU used | Wallpaper CPU | Compositor CPU |
 |---|---|---|---|
 | Still (plugin off) | ~0% | 2% | 4% |
-| **Topside Mountain View Lite** | ~2% | 10% | 8% |
+| **Details mode** | ~2% | 10% | 8% |
 | Topside Mountain View, half resolution | ~2% | 9% | 8% |
 | Topside Mountain View, 15 fps | ~3.5% | 8% | 8% |
 | **Topside Mountain View** | ~9% | 9% | 8% |
@@ -75,13 +68,12 @@ covers the screen, so these are the costs while it's actually visible:
 *GPU used* is how busy the GPU was, weighted by its clock speed against its maximum
 (1350 MHz here). *CPU* is a share of one core. The scene only works out each effect
 (fog, convoy, drone, mist) where it can be seen, and redraws once per frame, so even
-full motion at full resolution is light; Lite and half resolution are lighter still.
+full motion at full resolution is light; details mode and half resolution are lighter still.
 
 On battery the plugin draws at half resolution and 10 fps by default (plugin 1.1.2 or
 later: run `omarchy plugin update`). To use half resolution plugged in too, set
 `"renderScale": 0.5` in `~/.config/omarchy/live-wallpaper.json` (see the
-[plugin's README](https://github.com/Gleasonmt/omarchy-live-wallpaper)), or pick
-**Topside Mountain View Lite** for the lightest moving version.
+[plugin's README](https://github.com/Gleasonmt/omarchy-live-wallpaper)), or use details mode for the lightest moving version.
 
 ## Making changes
 
@@ -89,14 +81,14 @@ The scene is `src/1-mountain-view.frag` (with `src/common.glsl`); `src/scene.jso
 the pictures and the video it uses. Edit it, then run
 
 ```bash
-tools/build.sh           # rebuilds live/*.frag.qsb and live/*.json, the still in backgrounds/ and preview.jpg
+tools/build.sh           # rebuilds live/*.frag.qsb and live/*.json, the still in backgrounds/
 tools/build.sh --media   # also the animated previews in media/ (a few minutes)
 ```
 
 and commit the results. Needs `qt6-shadertools`, `qt6-declarative`, ImageMagick, jq and
 (for `--media`) ffmpeg. To try a change on your own desktop, run
-`omarchy theme update` after pushing, or copy the built files into
-`~/.config/omarchy/themes/topside-mountain-view/`.
+`live-wallpaper update` after pushing, or copy the built files into
+`~/.config/omarchy/live-backgrounds/topside-mountain-view/`.
 
 ## License
 
